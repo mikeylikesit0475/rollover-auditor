@@ -1,0 +1,82 @@
+[
+  {
+    "vendor": "Microsoft",
+    "product_from": "Microsoft 365 E5",
+    "product_to": "Microsoft 365 E7 (tiered bundle)",
+    "enforced_date": "2025-10-01",
+    "deflection_strategy": "Hold E5, disable unused E5 features, and negotiate SKU downgrade or price lock before renewal.",
+    "typical_cost_formula": "per_seat * 12",
+    "impact_estimate": "15-30% price uplift on per-seat licensing if unmitigated.",
+    "notes": "Curated from public Microsoft 365 commercial pricing transitions."
+  },
+  {
+    "vendor": "Salesforce",
+    "product_from": "Salesforce Classic",
+    "product_to": "Salesforce Lightning Experience",
+    "enforced_date": "2025-01-01",
+    "deflection_strategy": "Freeze custom Visualforce builds; use Lightning-readiness audit; delay via sandbox parity testing.",
+    "typical_cost_formula": "fixed fee",
+    "impact_estimate": "Migration engineering + retraining; moderate uplift OPEX.",
+    "notes": "Curated from Salesforce platform modernization guidance."
+  },
+  {
+    "vendor": "SAP",
+    "product_from": "SAP ECC 6.0",
+    "product_to": "SAP S/4HANA",
+    "enforced_date": "2027-12-31",
+    "deflection_strategy": "Extend support via RISE or keep ECC with third-party support; phase migration by module.",
+    "typical_cost_formula": "fixed fee",
+    "impact_estimate": "Multi-year ERP replacement, 3-8x annual license cost.",
+    "notes": "Curated from SAP maintenance framework."
+  },
+  {
+    "vendor": "Oracle",
+    "product_from": "Oracle Java SE (free)",
+    "product_to": "Oracle Java SE (paid subscription)",
+    "enforced_date": "2023-01-23",
+    "deflection_strategy": "Migrate to Temurin/OpenJDK; pin LTS Java versions; audit classpath.",
+    "typical_cost_formula": "per_seat * 12",
+    "impact_estimate": "Employee-based pricing can exceed legacy by order of magnitude.",
+    "notes": "Curated from Oracle Java SE subscription change."
+  },
+  {
+    "vendor": "VMware (Broadcom)",
+    "product_from": "VMware vSphere (standalone)",
+    "product_to": "VMware Cloud Foundation (VCF)",
+    "enforced_date": "2024-05-01",
+    "deflection_strategy": "Evaluate Nutanix/Proxmox/KVM; negotiate VCF tranche; retain perpetual where possible.",
+    "typical_cost_formula": "fixed fee",
+    "impact_estimate": "3-5x license cost uplift typical.",
+    "notes": "Curated from Broadcom VMware licensing repositioning."
+  },
+  {
+    "vendor": "IBM",
+    "product_from": "IBM MQ (PVU)",
+    "product_to": "IBM MQ (VPC / container)",
+    "enforced_date": "2024-01-01",
+    "deflection_strategy": "Right-size PVU counts; containerise to VPC; renegotiate at renewal.",
+    "typical_cost_formula": "per_seat * 12",
+    "impact_estimate": "Metric change (PVU->VPC) can inflate 2-4x.",
+    "notes": "Curated from IBM licensing metric updates."
+  },
+  {
+    "vendor": "Atlassian",
+    "product_from": "Atlassian Server",
+    "product_to": "Atlassian Cloud (Data Center sunset)",
+    "enforced_date": "2024-02-15",
+    "deflection_strategy": "Move to Data Center first, then cloud on own timeline; evaluate alternatives.",
+    "typical_cost_formula": "fixed fee",
+    "impact_estimate": "Cloud premium vs Server; downtime risk high.",
+    "notes": "Curated from Atlassian end-of-server."
+  },
+  {
+    "vendor": "Adobe",
+    "product_from": "Adobe Creative Cloud (perpetual CS)",
+    "product_to": "Adobe Creative Cloud (subscription)",
+    "enforced_date": "2013-05-06",
+    "deflection_strategy": "Pin versions on maintained perpetual; evaluate open-source alternatives.",
+    "typical_cost_formula": "fixed fee",
+    "impact_estimate": "Recurring subscription vs one-time; long-term TCO rise.",
+    "notes": "Curated historical scenario."
+  }
+]
