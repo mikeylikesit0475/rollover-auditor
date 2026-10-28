@@ -1,4 +1,9 @@
-"""Match assets to vendor upgrades; produce exposure risk scores."""
+"""Match assets to vendor upgrades; produce exposure (heuristic) risk scores.
+
+Manually-tuned weights: feature usage tier (0-40), contract renewal recency (0-30),
+upgrade imminence (0-20), embedded seat-count exposure (+10). Triage signal only,
+not a calibrated probability; does not estimate savings. Tune with citations.
+"""
 from __future__ import annotations
 
 from collections.abc import Iterable
@@ -33,11 +38,8 @@ def match_upgrades(asset: Asset, upgrades: Iterable[VendorUpgrade]) -> list[Vend
             or _norm(u.product_from) in ap
         ):
             out.append(u)
-    # fallback: vendor-only match if no product match found
-    if not out:
-        for u in upgrades:
-            if _norm(u.vendor) in av or av in _norm(u.vendor):
-                out.append(u)
+    # No vendor-only fallback: a vendor-only match over-matches
+    # (any Microsoft product → M365 upgrade) → false positives.
     return out
 
 
@@ -51,7 +53,9 @@ def score_risk(
     factors: list[str] = []
     score = 0
     tier = asset.feature_usage or "standard"
-    tier_score = _USAGE_TIER_SCORES.get(tier, 10)
+    tier_score = _USAGE_TIER_SCORES.get(tier, 0)
+    if tier and tier not in _USAGE_TIER_SCORES:
+        factors.append(f"unknown feature usage tier '{tier}' (0)")
     score += tier_score
     if tier in ("core", "heavy"):
         factors.append(f"high feature usage tier '{tier}' (+{tier_score})")
