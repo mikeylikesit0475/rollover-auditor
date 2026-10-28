@@ -11,3 +11,4 @@ Component map:
 - `auth/jwt.py`, `auth/dependencies.py`: fail-closed JWT + bcrypt.
 
 Data flow: Asset CSV -> assets -> matching (vs registry) -> risk scores + deflections -> report (md/text/pdf). All offline, single-tenant, deterministic.
+

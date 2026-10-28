@@ -92,7 +92,10 @@ def render_pdf_bytes(report_md: str) -> bytes:
     pdf.add_page()
     pdf.set_font("Helvetica", size=10)
     for line in report_md.splitlines():
-        # fpdf core fonts only support latin-1; replace unsupported chars.
         safe = line.encode("latin-1", "replace").decode("latin-1")
+        # wrap at ~100 chars so long lines do not overflow the page
+        while len(safe) > 100:
+            pdf.cell(0, 6, safe[:100], new_x="LMARGIN", new_y="NEXT")
+            safe = "  " + safe[100:]
         pdf.cell(0, 6, safe, new_x="LMARGIN", new_y="NEXT")
     return bytes(pdf.output())
