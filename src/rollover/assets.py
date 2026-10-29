@@ -24,7 +24,7 @@ def _date(value: str) -> date | None:
 def _int(value: str) -> int:
     try:
         return int(float(value.strip()))
-    except (ValueError, AttributeError):
+    except (ValueError, AttributeError, TypeError):
         return 1
 
 

@@ -54,7 +54,15 @@ def create_app() -> FastAPI:
 
     @app.post("/report", tags=["report"])
     async def report(request: Request, format: str = "markdown") -> dict[str, object]:
-        body = (await request.body()).decode("utf-8", errors="replace")
+        raw = await request.body()
+        if not raw:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="empty csv body")
+        if len(raw) > 4_000_000:
+            raise HTTPException(
+                status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                detail="csv body too large (max 4MB)",
+            )
+        body = raw.decode("utf-8", errors="replace")
         if not body.strip():
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="empty csv body")
         assets = read_assets_from_text(body)
